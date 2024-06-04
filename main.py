@@ -1,28 +1,46 @@
 import flet as ft
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
+    page.window_height=640
+    page.window_width=360
+    page.title = "avoe.dev ECO project"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
-
-    def minus_click(e):
-        txt_number.value = str(int(txt_number.value) - 1)
-        page.update()
-
-    def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
-        page.update()
+    def isbannertrue_fun(isbannertrue):
+        isbannertrue=True
+        return isbannertrue
+    
 
     page.add(
-        ft.Row(
-            [
-                ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
-                txt_number,
-                ft.IconButton(ft.icons.ADD, on_click=plus_click),
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-        )
+        ft.Card(
+            content=ft.Container(
+                content=ft.Column(
+                    [
+                        ft.ListTile(
+                            leading=ft.Icon(ft.icons.DANGEROUS_OUTLINED),
+                            title=ft.Text("Project is under development! There may be many errors and bugs, please report a bug if you found any. Thank you!")
+                        ),
+                        ft.Row(
+                            [ft.ElevatedButton("Learn more",icon=ft.icons.INSERT_LINK_OUTLINED),ft.ElevatedButton("Report a bug",icon=ft.icons.BUG_REPORT,on_click=isbannertrue_fun), ft.ElevatedButton("Support project",icon=ft.icons.ATTACH_MONEY)],
+                            alignment=ft.MainAxisAlignment.END,
+                        ),
+                    ]
+                ),
+                padding=10,
+                border_radius=10,
+                alignment=ft.alignment.top_center
+            )
+        ),
+        ft.Banner(
+            ft.Row([
+                ft.Text("Development mode"),
+                ft.ElevatedButton("Learn more"),
+                ft.ElevatedButton("Dismiss"),
+            ]),
+            bgcolor="gray",
+            open=True
+        ),
     )
+
 
 ft.app(main)
